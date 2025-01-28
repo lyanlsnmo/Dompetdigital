@@ -5,28 +5,10 @@ import {View, Text, Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-function Home() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-function History() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>History Screen</Text>
-    </View>
-  );
-}
-function Account() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
+import Home from './src/screens/Home';
+import History from './src/screens/History';
+import Account from './src/screens/Account';
+import Login from './src/screens/Login';
 
 const Tab = createBottomTabNavigator();
 
@@ -72,6 +54,7 @@ const Stack = createNativeStackNavigator();
 function RootStack() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="MyTabs" component={MyTabs} />
     </Stack.Navigator>
   );
