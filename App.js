@@ -9,6 +9,8 @@ import Home from './src/screens/Home';
 import History from './src/screens/History';
 import Account from './src/screens/Account';
 import Login from './src/screens/Login';
+import Income from './src/screens/Income';
+import Outcome from './src/screens/Outcome';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,9 +25,10 @@ function MyTabs() {
             iconSource = require('./src/assets/home.png');
           } else if (route.name === 'History') {
             iconSource = require('./src/assets/history.png');
-          } else if (route.name === 'Account') {
-            iconSource = require('./src/assets/account.png');
           }
+          //  else if (route.name === 'Account') {
+          //   iconSource = require('./src/assets/account.png');
+          // }
 
           return (
             <Image
@@ -33,18 +36,17 @@ function MyTabs() {
               style={{
                 width: 24,
                 height: 24,
-                tintColor: focused ? '#98D8EF' : 'gray',
+                tintColor: focused ? '#EFB6C8' : 'gray',
               }}
             />
           );
         },
-        tabBarActiveTintColor: '#98D8EF',
+        tabBarActiveTintColor: '#EFB6C8',
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="History" component={History} />
-      <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
 }
@@ -54,8 +56,9 @@ const Stack = createNativeStackNavigator();
 function RootStack() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="MyTabs" component={MyTabs} />
+      <Stack.Screen name="Income" component={Income} />
+      <Stack.Screen name="Outcome" component={Outcome} />
     </Stack.Navigator>
   );
 }
