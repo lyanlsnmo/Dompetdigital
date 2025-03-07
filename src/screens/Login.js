@@ -29,23 +29,27 @@ function Login() {
             gap: 20,
           }}>
           {/* USERNAME */}
+
           <TextInput
+            placeholderTextColor={'gray'}
             placeholder="Username"
             style={{
               borderBottomWidth: 1,
-              fontSize: 20,
+              fontSize: 18,
               paddingVertical: 0,
               height: 50,
             }}
           />
+
           {/* USERNAME */}
 
           {/* PASSWORD  */}
           <TextInput
+            placeholderTextColor={'gray'}
             placeholder="Password"
             style={{
               borderBottomWidth: 1,
-              fontSize: 20,
+              fontSize: 18,
               paddingVertical: 0,
               height: 50,
             }}
@@ -59,12 +63,12 @@ function Login() {
             }}
             style={{
               backgroundColor: '#B5828C',
-              height: 50,
+              height: 45,
               borderRadius: 15,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{color: 'black', fontWeight: 'bold', fontSize: 20}}>
+            <Text style={{color: 'black', fontWeight: 'bold', fontSize: 17}}>
               LOGIN
             </Text>
           </TouchableOpacity>
