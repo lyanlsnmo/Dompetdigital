@@ -11,6 +11,7 @@ import Account from './src/screens/Account';
 import Login from './src/screens/Login';
 import Income from './src/screens/Income';
 import Outcome from './src/screens/Outcome';
+import SplashScreen from './src/screens/SplashScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -56,6 +57,7 @@ const Stack = createNativeStackNavigator();
 function RootStack() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="MyTabs" component={MyTabs} />
       <Stack.Screen name="Income" component={Income} />
       <Stack.Screen name="Outcome" component={Outcome} />

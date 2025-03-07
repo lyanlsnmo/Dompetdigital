@@ -3,12 +3,18 @@ import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 function History() {
   return (
     <View style={{flex: 1}}>
-      <View>
+      <View
+        style={{
+          elevation: 5,
+          backgroundColor: 'white',
+          height: 80,
+          zIndex: 99,
+          justifyContent: 'center',
+        }}>
         <Text
           style={{
             fontWeight: 'bold',
             fontSize: 25,
-            padding: 20,
             textAlign: 'center',
           }}>
           History
@@ -17,9 +23,7 @@ function History() {
       <ScrollView
         style={{
           flex: 1,
-          backgroundColor: '#EFB6C8',
-          borderTopRightRadius: 20,
-          borderTopLeftRadius: 20,
+          backgroundColor: 'white',
         }}>
         <View style={{padding: 30}}>
           {[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2].map((item, index) => {
@@ -27,7 +31,7 @@ function History() {
               <View
                 key={index}
                 style={{
-                  backgroundColor: 'white',
+                  backgroundColor: '#EFB6C8',
                   elevation: 5,
                   alignItems: 'center',
                   flexDirection: 'row',
