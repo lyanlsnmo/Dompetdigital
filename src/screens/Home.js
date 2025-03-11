@@ -162,7 +162,7 @@ function Home() {
               <View
                 key={index}
                 style={{
-                  backgroundColor: 'white',
+                  backgroundColor: '#EFB6C8',
                   elevation: 5,
                   alignItems: 'center',
                   flexDirection: 'row',
