@@ -9,8 +9,6 @@ function Income() {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
 
-  console.log(date);
-
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       {/* HEADER */}
