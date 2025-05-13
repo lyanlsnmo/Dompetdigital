@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {React, useState} from 'react';
 import {
   Text,
   View,
@@ -11,57 +11,50 @@ import {
 import DatePicker from 'react-native-date-picker';
 import db from '../../database';
 
-function Income() {
+function EditIncome() {
   const navigation = useNavigation();
+  const route = useRoute();
 
-  const [date, setDate] = useState(new Date());
+  const {catatan} = route.params;
+
+  const [date, setDate] = useState(new Date(catatan?.date));
   const [open, setOpen] = useState(false);
 
-  const [judul, setJudul] = useState('');
-  const [deskripsi, setDeskripsi] = useState('');
-  const [nominal, setNominal] = useState(0);
+  const [judul, setJudul] = useState(catatan?.judul);
+  const [deskripsi, setDeskripsi] = useState(catatan?.deskripsi);
+  const [nominal, setNominal] = useState(catatan?.nominal);
 
   const [judulFocused, setJudulFocused] = useState(false);
   const [deskripsiFocused, setDeskripsiFocused] = useState(false);
   const [nominalFocused, setNominalFocused] = useState(false);
 
   const handleSavePress = () => {
-    console.log('des', deskripsi);
-
     if (judul.length === 0) {
       Alert.alert('Judul tidak boleh kosong');
     } else if (deskripsi.length === 0) {
       Alert.alert('Deskripsi tidak boleh kosong');
-    } else if (nominal === 0) {
+    } else if (nominal === 0 || nominal.length === 0) {
       Alert.alert('Nominal tidak boleh kosong');
     } else {
-      saveIncome();
+      updateIncome();
     }
   };
 
-  const saveIncome = () => {
+  const updateIncome = () => {
     db.transaction(tx => {
       tx.executeSql(
-        'INSERT INTO notes (judul, deskripsi, nominal, date, type, created_at) VALUES (?, ?, ?, ?, ?, ?);',
-        [
-          judul,
-          deskripsi,
-          nominal,
-          date.toISOString(),
-          'income',
-          new Date().toISOString(),
-        ],
+        'UPDATE notes SET judul = ?, deskripsi = ?, nominal = ?, date = ? WHERE id = ?;',
+        [judul, deskripsi, nominal, date.toISOString(), catatan?.id],
         () => {
-          Alert.alert('Berhasil Menambahkan Catatan');
+          Alert.alert('Berhasil Memperbarui Catatan');
           navigation.goBack();
         },
         error => {
-          Alert.alert('Gagal Menambahkan Catatan');
-          console.error('Error inserting data:', error);
+          Alert.alert('Gagal Memperbarui Catatan');
+          console.error('Error updating data:', error);
         },
       );
     });
-    ``;
   };
 
   return (
@@ -83,7 +76,7 @@ function Income() {
             style={{height: 35, width: 35}}
           />
         </TouchableOpacity>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Tambah Pemasukan</Text>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Edit</Text>
       </View>
       {/* HEADER */}
 
@@ -115,10 +108,15 @@ function Income() {
         <TextInput
           onFocus={() => setDeskripsiFocused(true)}
           onBlur={() => setDeskripsiFocused(false)}
-          value={deskripsi}
-          onChangeText={text => setDeskripsi(text)}
+          value={deskripsi || ''}
+          onChangeText={text => {
+            if (text.trim() === '') {
+              return;
+            }
+            setDeskripsi(text);
+          }}
           placeholderTextColor={'gray'}
-          placeholder="Deskripsi"
+          placeholder={deskripsi ? 'Deskripsi' : 'Masukkan deskripsi'}
           style={{
             borderWidth: deskripsiFocused ? 2 : 0.5,
             fontSize: 18,
@@ -143,9 +141,9 @@ function Income() {
             }
 
             const isValidFormat =
-              /^[1-9][0-9]*([.,][0-9]*)?$|^0[.,][0-9]+$/.test(valid);
+              /^[1-9][0-9]*([.,]?[0-9]*)?$|^0[.,][0-9]+$/.test(valid);
 
-            if (isValidFormat) {
+            if (isValidFormat || valid === '') {
               setNominal(valid);
             }
           }}
@@ -203,11 +201,11 @@ function Income() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>Simpan</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 16}}>Perbarui</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-export default Income;
+export default EditIncome;

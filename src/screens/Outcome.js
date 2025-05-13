@@ -1,7 +1,15 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+} from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import db from '../../database';
 
 function Outcome() {
   const navigation = useNavigation();
@@ -9,7 +17,51 @@ function Outcome() {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
 
-  console.log(date);
+  const [judul, setJudul] = useState('');
+  const [deskripsi, setDeskripsi] = useState('');
+  const [nominal, setNominal] = useState(0);
+
+  const [judulFocused, setJudulFocused] = useState(false);
+  const [deskripsiFocused, setDeskripsiFocused] = useState(false);
+  const [nominalFocused, setNominalFocused] = useState(false);
+
+  const handleSavePress = () => {
+    console.log('des', deskripsi);
+
+    if (judul.length === 0) {
+      Alert.alert('Judul tidak boleh kosong');
+    } else if (deskripsi.length === 0) {
+      Alert.alert('Deskripsi tidak boleh kosong');
+    } else if (nominal === 0) {
+      Alert.alert('Nominal tidak boleh kosong');
+    } else {
+      saveOutcome();
+    }
+  };
+
+  const saveOutcome = () => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO notes (judul, deskripsi, nominal, date, type, created_at) VALUES (?, ?, ?, ?, ?, ?);',
+        [
+          judul,
+          deskripsi,
+          nominal,
+          date.toISOString(),
+          'outcome',
+          new Date().toISOString(),
+        ],
+        () => {
+          Alert.alert('Berhasil Menambahkan Catatan');
+          navigation.goBack();
+        },
+        error => {
+          Alert.alert('Gagal Menambahkan Catatan');
+          console.error('Error inserting data:', error);
+        },
+      );
+    });
+  };
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
@@ -44,43 +96,72 @@ function Outcome() {
           gap: 20,
         }}>
         <TextInput
+          onFocus={() => setJudulFocused(true)}
+          onBlur={() => setJudulFocused(false)}
+          value={judul}
+          onChangeText={text => setJudul(text)}
           placeholderTextColor={'gray'}
           placeholder="Judul"
           style={{
-            borderWidth: 0.5,
+            borderWidth: judulFocused ? 2 : 0.5,
             fontSize: 18,
             paddingVertical: 0,
             height: 50,
             borderRadius: 10,
             color: 'black',
             paddingHorizontal: 10,
+            borderColor: judulFocused ? '#2193b0' : 'gray',
           }}
         />
         <TextInput
+          onFocus={() => setDeskripsiFocused(true)}
+          onBlur={() => setDeskripsiFocused(false)}
+          value={deskripsi}
+          onChangeText={text => setDeskripsi(text)}
           placeholderTextColor={'gray'}
           placeholder="Deskripsi"
           style={{
-            borderWidth: 0.5,
+            borderWidth: deskripsiFocused ? 2 : 0.5,
             fontSize: 18,
             paddingVertical: 0,
             height: 50,
             borderRadius: 10,
             color: 'black',
             paddingHorizontal: 10,
+            borderColor: deskripsiFocused ? '#2193b0' : 'gray',
           }}
         />
+
         <TextInput
+          onFocus={() => setNominalFocused(true)}
+          onBlur={() => setNominalFocused(false)}
+          value={nominal}
+          onChangeText={text => {
+            const valid = text.replace(/[^0-9.,]/g, '');
+
+            if (valid === '0') {
+              return;
+            }
+
+            const isValidFormat =
+              /^[1-9][0-9]*([.,]?[0-9]*)?$|^0[.,][0-9]+$/.test(valid);
+
+            if (isValidFormat || valid === '') {
+              setNominal(valid);
+            }
+          }}
           placeholderTextColor={'gray'}
           placeholder="Nominal Pengeluaran"
           keyboardType="numeric"
           style={{
-            borderWidth: 0.5,
+            borderWidth: nominalFocused ? 2 : 0.5,
             fontSize: 18,
             paddingVertical: 0,
             height: 50,
             borderRadius: 10,
             color: 'black',
             paddingHorizontal: 10,
+            borderColor: nominalFocused ? '#2193b0' : 'gray',
           }}
         />
         <DatePicker
@@ -114,8 +195,9 @@ function Outcome() {
         </TouchableOpacity>
 
         <TouchableOpacity
+          onPress={handleSavePress}
           style={{
-            backgroundColor: '#EFB6C8',
+            backgroundColor: '#2193b0',
             height: 50,
             borderRadius: 10,
             justifyContent: 'center',

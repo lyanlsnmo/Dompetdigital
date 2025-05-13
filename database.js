@@ -1,9 +1,9 @@
 import SQLite from 'react-native-sqlite-storage';
 
-// open a database
+// buka database
 const db = SQLite.openDatabase(
   {
-    name: 'Catatan.db',
+    name: 'Catatan.db', // nama file databasenya
     location: 'default',
   },
   () => {
@@ -14,18 +14,24 @@ const db = SQLite.openDatabase(
   },
 );
 
-// buat tabel pemasukan
-const createIncomeTables = () => {
+// buat tabel catatan pengeluaran/pemasukan
+const createNoteTables = () => {
+  //fungsi untuk membuat tabel
   db.transaction(tx => {
+    //perintah eksekusi querySql
     tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS pemasukan (id INTEGER PRIMARY KEY AUTOINCREMENT,
+      `CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY AUTOINCREMENT,
                   judul TEXT,
                   deskripsi TEXT,
                   nominal TEXT,
-                  date TEXT
+                  type TEXT,
+                  date TEXT,
+                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
               );`,
       [],
-      () => {},
+      () => {
+        console.log('succes');
+      },
       error => {
         console.error('Error creating tables:', error);
       },
@@ -33,26 +39,6 @@ const createIncomeTables = () => {
   });
 };
 
-// buat tabel pengeluaran
-const createOutcomeTables = () => {
-  db.transaction(tx => {
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS pengeluaran (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    judul TEXT,
-                    deskripsi TEXT,
-                    nominal TEXT,
-                    date TEXT
-                );`,
-      [],
-      () => {},
-      error => {
-        console.error('Error creating tables:', error);
-      },
-    );
-  });
-};
-
-createIncomeTables();
-createOutcomeTables();
+createNoteTables(); //pemanggilan fungsi
 
 export default db;

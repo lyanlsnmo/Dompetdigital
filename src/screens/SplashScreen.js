@@ -7,8 +7,8 @@ const SplashScreen = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.replace('MyTabs'); // Ganti dengan nama screen tujuan
-    }, 2000); // Timeout 3 detik
+      navigation.replace('MyTabs');
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, [navigation]);
