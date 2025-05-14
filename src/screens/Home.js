@@ -1,5 +1,5 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  RefreshControl,
   Alert,
   Modal,
 } from 'react-native';
@@ -53,6 +52,12 @@ function Home() {
         },
       );
     });
+  };
+
+  const refreshData = () => {
+    getCatatan();
+    getNominalPemasukan();
+    getNominalPengeluaran();
   };
 
   const getNominalPemasukan = () => {
@@ -335,9 +340,6 @@ function Home() {
       </View>
 
       <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
         style={{
           flex: 1,
           backgroundColor: 'white',
@@ -352,13 +354,14 @@ function Home() {
                 key={index}
                 style={{
                   backgroundColor: '#FDFAF6',
-                  // elevation: 5,
                   alignItems: 'center',
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   borderRadius: 20,
                   padding: 20,
                   marginBottom: 10,
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#d3d3d3',
                 }}>
                 <View style={{gap: 3}}>
                   <Text
@@ -467,7 +470,7 @@ function Home() {
                 onPress={async () => {
                   await deleteNote(selectedItem?.id);
                   closeModal();
-                  getCatatan();
+                  refreshData();
                 }}
                 style={{
                   backgroundColor: 'rgba(200, 50, 50, 0.3)',

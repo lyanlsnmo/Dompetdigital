@@ -6,7 +6,6 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  RefreshControl,
   Alert,
   Modal,
 } from 'react-native';
@@ -180,12 +179,10 @@ function History() {
         <TouchableOpacity
           onPress={() => setActiveFilter('all')}
           style={{
-            paddingHorizontal: 23,
+            paddingHorizontal: 26,
             backgroundColor: activeFilter === 'all' ? '#155E95' : '#b0bec5',
             elevation: 5,
-            borderRadius: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
+            borderRadius: 30,
             paddingVertical: 15,
           }}>
           <Text
@@ -202,12 +199,10 @@ function History() {
           onPress={() => setActiveFilter('income')}
           style={{
             paddingVertical: 15,
-            paddingHorizontal: 23,
+            paddingHorizontal: 26,
             backgroundColor: activeFilter === 'income' ? '#155E95' : '#b0bec5',
             elevation: 5,
-            borderRadius: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
+            borderRadius: 30,
           }}>
           <Text
             style={{
@@ -223,12 +218,10 @@ function History() {
           onPress={() => setActiveFilter('expense')}
           style={{
             paddingVertical: 15,
-            paddingHorizontal: 23,
+            paddingHorizontal: 26,
             backgroundColor: activeFilter === 'expense' ? '#155E95' : '#b0bec5',
             elevation: 5,
-            borderRadius: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
+            borderRadius: 30,
           }}>
           <Text
             style={{
@@ -242,9 +235,9 @@ function History() {
       </View>
 
       <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+        // refreshControl={
+        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        // }
         style={{
           flex: 1,
           backgroundColor: 'white',
@@ -259,13 +252,14 @@ function History() {
                 key={index}
                 style={{
                   backgroundColor: '#FDFAF6',
-                  elevation: 5,
                   alignItems: 'center',
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   borderRadius: 20,
                   padding: 20,
                   marginBottom: 10,
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#d3d3d3',
                 }}>
                 <View style={{gap: 3}}>
                   <Text
