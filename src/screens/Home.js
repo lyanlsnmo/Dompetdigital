@@ -104,15 +104,15 @@ function Home() {
     }, []),
   );
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      getCatatan();
-      getNominalPemasukan();
-      getNominalPengeluaran();
-      setRefreshing(false);
-    }, 2000);
-  }, []);
+  // const onRefresh = useCallback(() => {
+  //   setRefreshing(true);
+  //   setTimeout(() => {
+  //     getCatatan();
+  //     getNominalPemasukan();
+  //     getNominalPengeluaran();
+  //     setRefreshing(false);
+  //   }, 2000);
+  // }, []);
 
   const timeAgo = date => {
     const now = new Date();

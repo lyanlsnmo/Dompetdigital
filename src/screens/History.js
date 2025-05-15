@@ -46,14 +46,14 @@ function History() {
     }, []),
   );
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      getCatatan();
+  // const onRefresh = useCallback(() => {
+  //   setRefreshing(true);
+  //   setTimeout(() => {
+  //     getCatatan();
 
-      setRefreshing(false);
-    }, 2000);
-  }, []);
+  //     setRefreshing(false);
+  //   }, 2000);
+  // }, []);
 
   const timeAgo = date => {
     const now = new Date();
@@ -156,7 +156,7 @@ function History() {
         style={{
           backgroundColor: 'white',
           height: 65,
-          zIndex: 99,
+          zIndex: 100,
           justifyContent: 'center',
         }}>
         <Text
@@ -169,27 +169,29 @@ function History() {
           History
         </Text>
       </View>
+
       <View
         style={{
           flexDirection: 'row',
           paddingHorizontal: 20,
           justifyContent: 'space-between',
-          backgroundColor: 'white',
         }}>
         <TouchableOpacity
           onPress={() => setActiveFilter('all')}
           style={{
-            paddingHorizontal: 26,
-            backgroundColor: activeFilter === 'all' ? '#155E95' : '#b0bec5',
-            elevation: 5,
-            borderRadius: 30,
-            paddingVertical: 15,
+            paddingVertical: 8,
+            paddingHorizontal: 20,
+            borderRadius: 20,
+            borderWidth: 1,
+            borderColor: activeFilter === 'all' ? '#1E3A2E' : '#555',
+            backgroundColor: activeFilter === 'all' ? '#155E98' : 'transparent',
+            marginRight: 8,
           }}>
           <Text
             style={{
               color: activeFilter === 'all' ? 'white' : 'black',
               fontSize: 16,
-              fontWeight: 'bold',
+              fontWeight: '500',
             }}>
             Semua
           </Text>
@@ -198,17 +200,20 @@ function History() {
         <TouchableOpacity
           onPress={() => setActiveFilter('income')}
           style={{
-            paddingVertical: 15,
-            paddingHorizontal: 26,
-            backgroundColor: activeFilter === 'income' ? '#155E95' : '#b0bec5',
-            elevation: 5,
-            borderRadius: 30,
+            paddingVertical: 8,
+            paddingHorizontal: 20,
+            borderRadius: 20,
+            borderWidth: 1,
+            borderColor: activeFilter === 'income' ? '#1E3A2E' : 'gray',
+            backgroundColor:
+              activeFilter === 'income' ? '#155E98' : 'transparent',
+            marginRight: 8,
           }}>
           <Text
             style={{
               color: activeFilter === 'income' ? 'white' : 'black',
               fontSize: 16,
-              fontWeight: 'bold',
+              fontWeight: '500',
             }}>
             Pemasukan
           </Text>
@@ -217,17 +222,20 @@ function History() {
         <TouchableOpacity
           onPress={() => setActiveFilter('expense')}
           style={{
-            paddingVertical: 15,
-            paddingHorizontal: 26,
-            backgroundColor: activeFilter === 'expense' ? '#155E95' : '#b0bec5',
-            elevation: 5,
-            borderRadius: 30,
+            paddingVertical: 8,
+            paddingHorizontal: 20,
+            borderRadius: 20,
+            borderWidth: 1,
+            borderColor: activeFilter === 'expense' ? '#1E3A2E' : '#555',
+            backgroundColor:
+              activeFilter === 'expense' ? '#155E98' : 'transparent',
+            marginRight: 8,
           }}>
           <Text
             style={{
               color: activeFilter === 'expense' ? 'white' : 'black',
               fontSize: 16,
-              fontWeight: 'bold',
+              fontWeight: '500',
             }}>
             Pengeluaran
           </Text>
