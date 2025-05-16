@@ -14,7 +14,8 @@ import EditIncome from './src/screens/EditIncome';
 
 const Tab = createBottomTabNavigator();
 
-// bottom tab navigasi
+const Stack = createNativeStackNavigator();
+
 function MyTabs() {
   return (
     <Tab.Navigator
@@ -49,8 +50,6 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-
-const Stack = createNativeStackNavigator();
 
 function RootStack() {
   return (

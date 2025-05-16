@@ -66,7 +66,6 @@ function Income() {
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
-      {/* HEADER */}
       <View
         style={{
           height: 80,
@@ -80,14 +79,12 @@ function Income() {
           style={{marginHorizontal: 20}}>
           <Image
             source={require('./../assets/back.png')}
-            style={{height: 35, width: 35}}
+            style={{height: 30, width: 30}}
           />
         </TouchableOpacity>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Tambah Pemasukan</Text>
       </View>
-      {/* HEADER */}
 
-      {/* FORM INCOME */}
       <View
         style={{
           paddingHorizontal: 30,
@@ -106,7 +103,7 @@ function Income() {
             fontSize: 18,
             paddingVertical: 0,
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             color: 'black',
             paddingHorizontal: 10,
             borderColor: judulFocused ? '#2193b0' : 'gray',
@@ -124,7 +121,7 @@ function Income() {
             fontSize: 18,
             paddingVertical: 0,
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             color: 'black',
             paddingHorizontal: 10,
             borderColor: deskripsiFocused ? '#2193b0' : 'gray',
@@ -143,9 +140,9 @@ function Income() {
             }
 
             const isValidFormat =
-              /^[1-9][0-9]*([.,][0-9]*)?$|^0[.,][0-9]+$/.test(valid);
+              /^[1-9][0-9]*([.,]?[0-9]*)?$|^0[.,][0-9]+$/.test(valid);
 
-            if (isValidFormat) {
+            if (isValidFormat || valid === '') {
               setNominal(valid);
             }
           }}
@@ -157,7 +154,7 @@ function Income() {
             fontSize: 18,
             paddingVertical: 0,
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             color: 'black',
             paddingHorizontal: 10,
             borderColor: nominalFocused ? '#2193b0' : 'gray',
@@ -181,7 +178,7 @@ function Income() {
             borderWidth: 0.5,
             paddingVertical: 0,
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             paddingHorizontal: 10,
             justifyContent: 'center',
           }}>
@@ -199,7 +196,7 @@ function Income() {
           style={{
             backgroundColor: '#2193b0',
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             justifyContent: 'center',
             alignItems: 'center',
           }}>

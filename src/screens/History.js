@@ -19,8 +19,6 @@ function History() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const [refreshing, setRefreshing] = useState(false);
-
   const getCatatan = () => {
     db.transaction(tx => {
       tx.executeSql(
@@ -45,15 +43,6 @@ function History() {
       return () => {};
     }, []),
   );
-
-  // const onRefresh = useCallback(() => {
-  //   setRefreshing(true);
-  //   setTimeout(() => {
-  //     getCatatan();
-
-  //     setRefreshing(false);
-  //   }, 2000);
-  // }, []);
 
   const timeAgo = date => {
     const now = new Date();
@@ -175,6 +164,7 @@ function History() {
           flexDirection: 'row',
           paddingHorizontal: 20,
           justifyContent: 'space-between',
+          backgroundColor: 'white',
         }}>
         <TouchableOpacity
           onPress={() => setActiveFilter('all')}
@@ -243,14 +233,9 @@ function History() {
       </View>
 
       <ScrollView
-        // refreshControl={
-        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        // }
         style={{
           flex: 1,
           backgroundColor: 'white',
-          borderTopRightRadius: 20,
-          borderTopLeftRadius: 20,
         }}>
         <View style={{padding: 30}}>
           {filteredData.map((item, index) => {
@@ -266,8 +251,8 @@ function History() {
                   borderRadius: 20,
                   padding: 20,
                   marginBottom: 10,
-                  borderBottomWidth: 1,
-                  borderBottomColor: '#d3d3d3',
+                  borderWidth: 1,
+                  borderColor: '#ddd',
                 }}>
                 <View style={{gap: 3}}>
                   <Text

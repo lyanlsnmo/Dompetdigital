@@ -32,8 +32,6 @@ function Home() {
   const [dataPemasukan, setDataPemasukan] = useState(0);
   const [dataPengeluaran, setDataPengeluaran] = useState(0);
 
-  const [refreshing, setRefreshing] = useState(false);
-
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -103,16 +101,6 @@ function Home() {
       return () => {};
     }, []),
   );
-
-  // const onRefresh = useCallback(() => {
-  //   setRefreshing(true);
-  //   setTimeout(() => {
-  //     getCatatan();
-  //     getNominalPemasukan();
-  //     getNominalPengeluaran();
-  //     setRefreshing(false);
-  //   }, 2000);
-  // }, []);
 
   const timeAgo = date => {
     const now = new Date();
@@ -205,11 +193,10 @@ function Home() {
 
   return (
     <LinearGradient
-      colors={['#2193b0', '#6dd5ed']}
+      colors={['#1B56FD', '#6dd5ed']}
       start={{x: 1, y: 1}}
-      end={{x: 0, y: 1}}
+      end={{x: 1, y: 0}}
       style={{flex: 1}}>
-      {/* SALDO */}
       <View
         style={{
           padding: 30,
@@ -232,9 +219,6 @@ function Home() {
         </Text>
       </View>
 
-      {/* SALDO */}
-
-      {/* TRANSAKSI */}
       <View
         style={{
           padding: 15,
@@ -278,8 +262,6 @@ function Home() {
         </TouchableOpacity>
       </View>
 
-      {/* TRANSAKSI */}
-
       <View
         style={{
           paddingHorizontal: 5,
@@ -308,7 +290,7 @@ function Home() {
               Pemasukan
             </Text>
             <Text style={{color: 'green', fontSize: 16, fontWeight: 'bold'}}>
-              {formatToIDR(dataPemasukan)}
+              +{formatToIDR(dataPemasukan)}
             </Text>
           </View>
         </View>
@@ -333,7 +315,7 @@ function Home() {
               Pengeluaran
             </Text>
             <Text style={{color: 'red', fontSize: 15, fontWeight: 'bold'}}>
-              {formatToIDR(dataPengeluaran)}
+              -{formatToIDR(dataPengeluaran)}
             </Text>
           </View>
         </View>
@@ -341,7 +323,6 @@ function Home() {
 
       <ScrollView
         style={{
-          flex: 1,
           backgroundColor: 'white',
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
@@ -360,8 +341,8 @@ function Home() {
                   borderRadius: 20,
                   padding: 20,
                   marginBottom: 10,
-                  borderBottomWidth: 1,
-                  borderBottomColor: '#d3d3d3',
+                  borderWidth: 1,
+                  borderColor: '#ddd',
                 }}>
                 <View style={{gap: 3}}>
                   <Text
