@@ -32,7 +32,7 @@ function Outcome() {
       Alert.alert('Judul tidak boleh kosong');
     } else if (deskripsi.length === 0) {
       Alert.alert('Deskripsi tidak boleh kosong');
-    } else if (nominal === 0) {
+    } else if (nominal === 0 || nominal.length === 0) {
       Alert.alert('Nominal tidak boleh kosong');
     } else {
       saveOutcome();
@@ -134,18 +134,21 @@ function Outcome() {
           onBlur={() => setNominalFocused(false)}
           value={nominal}
           onChangeText={text => {
-            const valid = text.replace(/[^0-9.,]/g, '');
+            const cleaned = text.replace(/[^0-9]/g, '');
+            const formatted = cleaned.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            setNominal(formatted);
+            // const valid = text.replace(/[^0-9.,]/g, '');
 
-            if (valid === '0') {
-              return;
-            }
+            // if (valid === '0') {
+            //   return;
+            // }
 
-            const isValidFormat =
-              /^[1-9][0-9]*([.,]?[0-9]*)?$|^0[.,][0-9]+$/.test(valid);
+            // const isValidFormat =
+            //   /^[1-9][0-9]*([.,]?[0-9]*)?$|^0[.,][0-9]+$/.test(valid);
 
-            if (isValidFormat || valid === '') {
-              setNominal(valid);
-            }
+            // if (isValidFormat || valid === '') {
+            //   setNominal(valid);
+            // }
           }}
           placeholderTextColor={'gray'}
           placeholder="Nominal Pengeluaran"
@@ -201,7 +204,19 @@ function Outcome() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>Simpan</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 16, color: '#fff'}}>
+            Simpan
+          </Text>
+          <Image
+            source={require('./../assets/save.png')}
+            style={{
+              height: 20,
+              width: 20,
+              position: 'absolute',
+              left: '35%',
+              tintColor: '#fff',
+            }}
+          />
         </TouchableOpacity>
       </View>
     </View>

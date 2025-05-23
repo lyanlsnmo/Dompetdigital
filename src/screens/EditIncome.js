@@ -59,7 +59,6 @@ function EditIncome() {
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
-      {/* HEADER */}
       <View
         style={{
           height: 80,
@@ -73,14 +72,12 @@ function EditIncome() {
           style={{marginHorizontal: 20}}>
           <Image
             source={require('./../assets/back.png')}
-            style={{height: 35, width: 35}}
+            style={{height: 30, width: 30}}
           />
         </TouchableOpacity>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Edit</Text>
       </View>
-      {/* HEADER */}
 
-      {/* FORM INCOME */}
       <View
         style={{
           paddingHorizontal: 30,
@@ -99,7 +96,7 @@ function EditIncome() {
             fontSize: 18,
             paddingVertical: 0,
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             color: 'black',
             paddingHorizontal: 10,
             borderColor: judulFocused ? '#2193b0' : 'gray',
@@ -108,21 +105,16 @@ function EditIncome() {
         <TextInput
           onFocus={() => setDeskripsiFocused(true)}
           onBlur={() => setDeskripsiFocused(false)}
-          value={deskripsi || ''}
-          onChangeText={text => {
-            if (text.trim() === '') {
-              return;
-            }
-            setDeskripsi(text);
-          }}
+          value={deskripsi}
+          onChangeText={text => setDeskripsi(text)}
           placeholderTextColor={'gray'}
-          placeholder={deskripsi ? 'Deskripsi' : 'Masukkan deskripsi'}
+          placeholder="Deskripsi"
           style={{
             borderWidth: deskripsiFocused ? 2 : 0.5,
             fontSize: 18,
             paddingVertical: 0,
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             color: 'black',
             paddingHorizontal: 10,
             borderColor: deskripsiFocused ? '#2193b0' : 'gray',
@@ -155,7 +147,7 @@ function EditIncome() {
             fontSize: 18,
             paddingVertical: 0,
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             color: 'black',
             paddingHorizontal: 10,
             borderColor: nominalFocused ? '#2193b0' : 'gray',
@@ -179,7 +171,7 @@ function EditIncome() {
             borderWidth: 0.5,
             paddingVertical: 0,
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             paddingHorizontal: 10,
             justifyContent: 'center',
           }}>
@@ -197,11 +189,23 @@ function EditIncome() {
           style={{
             backgroundColor: '#2193b0',
             height: 50,
-            borderRadius: 10,
+            borderRadius: 20,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>Perbarui</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 16, color: '#fff'}}>
+            Perbarui
+          </Text>
+          <Image
+            source={require('./../assets/update.png')}
+            style={{
+              height: 25,
+              width: 25,
+              position: 'absolute',
+              left: '33%',
+              tintColor: '#fff',
+            }}
+          />
         </TouchableOpacity>
       </View>
     </View>

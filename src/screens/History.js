@@ -254,7 +254,7 @@ function History() {
                   borderWidth: 1,
                   borderColor: '#ddd',
                 }}>
-                <View style={{gap: 3}}>
+                <View style={{gap: 3, flexShrink: 1}}>
                   <Text
                     style={{
                       fontWeight: 'bold',
@@ -300,24 +300,22 @@ function History() {
             <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>
               Detail Catatan
             </Text>
-            <Text style={{fontWeight: 'bold', fontSize: 15}}>
-              {selectedItem?.judul}
-            </Text>
-            <Text style={{fontWeight: 'bold', fontSize: 15}}>
+            <Text style={{fontSize: 15}}>{selectedItem?.judul}</Text>
+            <Text style={{fontSize: 15}}>{selectedItem?.deskripsi}</Text>
+            <Text style={{fontSize: 15}}>
               {' '}
               {selectedItem?.type === 'income' ? 'Pemasukan' : 'Pengeluaran'}
             </Text>
 
             <Text
               style={{
-                fontWeight: 'bold',
                 fontSize: 15,
                 color: selectedItem?.type === 'income' ? 'green' : 'red',
               }}>
               {selectedItem?.type === 'income' ? '+' : '-'}
               {formatToIDR(selectedItem?.nominal)}
             </Text>
-            <Text style={{fontWeight: 'bold', fontSize: 15}}>
+            <Text style={{fontSize: 15}}>
               {formatDateString(selectedItem?.date)}
             </Text>
             <View style={{flexDirection: 'row', marginTop: 20}}>

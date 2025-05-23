@@ -41,8 +41,6 @@ function MyTabs() {
           );
         },
 
-        tabBarActiveTintColor: '#155E98',
-        tabBarInactiveTintColor: 'gray',
         headerShown: false,
       })}>
       <Tab.Screen name="Home" component={Home} />

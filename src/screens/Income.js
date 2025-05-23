@@ -32,7 +32,7 @@ function Income() {
       Alert.alert('Judul tidak boleh kosong');
     } else if (deskripsi.length === 0) {
       Alert.alert('Deskripsi tidak boleh kosong');
-    } else if (nominal === 0) {
+    } else if (nominal === 0 || nominal.length === 0) {
       Alert.alert('Nominal tidak boleh kosong');
     } else {
       saveIncome();
@@ -61,7 +61,6 @@ function Income() {
         },
       );
     });
-    ``;
   };
 
   return (
@@ -127,7 +126,6 @@ function Income() {
             borderColor: deskripsiFocused ? '#2193b0' : 'gray',
           }}
         />
-
         <TextInput
           onFocus={() => setNominalFocused(true)}
           onBlur={() => setNominalFocused(false)}
@@ -190,7 +188,6 @@ function Income() {
             {date.toDateString()}
           </Text>
         </TouchableOpacity>
-
         <TouchableOpacity
           onPress={handleSavePress}
           style={{
@@ -200,7 +197,19 @@ function Income() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>Simpan</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 17, color: '#fff'}}>
+            Simpan
+          </Text>
+          <Image
+            source={require('./../assets/save.png')}
+            style={{
+              height: 20,
+              width: 20,
+              position: 'absolute',
+              left: '35%',
+              tintColor: '#fff',
+            }}
+          />
         </TouchableOpacity>
       </View>
     </View>

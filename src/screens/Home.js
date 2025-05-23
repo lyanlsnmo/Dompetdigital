@@ -6,24 +6,11 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  StyleSheet,
   Alert,
   Modal,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import db from '../../database';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 22,
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-});
 
 function Home() {
   const navigation = useNavigation();
@@ -229,14 +216,12 @@ function Home() {
         <TouchableOpacity
           onPress={() => navigation.navigate('Income')}
           style={{
-            height: 70,
-            width: '40%',
-            backgroundColor: 'white',
-            elevation: 5,
-            borderRadius: 10,
-            justifyContent: 'center',
+            backgroundColor: '#D2F1D2',
+            borderRadius: 20,
+            width: '35%',
             alignItems: 'center',
-            marginRight: 10,
+            paddingVertical: 20,
+            elevation: 4,
           }}>
           <Image
             source={require('./../assets/income.png')}
@@ -246,14 +231,12 @@ function Home() {
         <TouchableOpacity
           onPress={() => navigation.navigate('Outcome')}
           style={{
-            height: 70,
-            width: '40%',
-            backgroundColor: 'white',
-            elevation: 5,
-            borderRadius: 10,
-            justifyContent: 'center',
+            backgroundColor: '#FAD2CF',
+            borderRadius: 20,
+            width: '35%',
             alignItems: 'center',
-            marginRight: 10,
+            paddingVertical: 20,
+            elevation: 4,
           }}>
           <Image
             source={require('./../assets/outcome.png')}
@@ -275,10 +258,15 @@ function Home() {
             flexDirection: 'row',
             height: 70,
             width: '40%',
+            marginLeft: '8%',
           }}>
           <Image
             source={require('./../assets/Masuk.png')}
-            style={{height: 35, width: 35, tintColor: '#3A7D44'}}
+            style={{
+              height: 35,
+              width: 35,
+              tintColor: '#3A7D44',
+            }}
           />
           <View style={{marginLeft: 5}}>
             <Text
@@ -303,7 +291,11 @@ function Home() {
           }}>
           <Image
             source={require('./../assets/Keluar.png')}
-            style={{height: 35, width: 35, tintColor: '#A31D1D'}}
+            style={{
+              height: 35,
+              width: 35,
+              tintColor: '#A31D1D',
+            }}
           />
           <View style={{marginLeft: 5}}>
             <Text
@@ -314,7 +306,12 @@ function Home() {
               }}>
               Pengeluaran
             </Text>
-            <Text style={{color: 'red', fontSize: 15, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                color: 'red',
+                fontSize: 15,
+                fontWeight: 'bold',
+              }}>
               -{formatToIDR(dataPengeluaran)}
             </Text>
           </View>
@@ -344,7 +341,7 @@ function Home() {
                   borderWidth: 1,
                   borderColor: '#ddd',
                 }}>
-                <View style={{gap: 3}}>
+                <View style={{gap: 3, flexShrink: 1}}>
                   <Text
                     style={{
                       fontWeight: 'bold',
@@ -358,6 +355,7 @@ function Home() {
                   <Text>{timeAgo(item.date)}</Text>
                 </View>
 
+                <View style={{alignItems: 'flex-end'}}></View>
                 <Text
                   style={{
                     color: item.type === 'income' ? 'green' : 'red',
@@ -394,23 +392,21 @@ function Home() {
             <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>
               Detail Catatan
             </Text>
-            <Text style={{fontWeight: 'bold', fontSize: 15}}>
-              {selectedItem?.judul}
-            </Text>
-            <Text style={{fontWeight: 'bold', fontSize: 15}}>
+            <Text style={{fontSize: 15}}>{selectedItem?.judul}</Text>
+            <Text style={{fontSize: 15}}>{selectedItem?.deskripsi}</Text>
+            <Text style={{fontSize: 15}}>
               {' '}
               {selectedItem?.type === 'income' ? 'Pemasukan' : 'Pengeluaran'}
             </Text>
             <Text
               style={{
-                fontWeight: 'bold',
                 fontSize: 15,
                 color: selectedItem?.type === 'income' ? 'green' : 'red',
               }}>
               {selectedItem?.type === 'income' ? '+' : '-'}
               {formatToIDR(selectedItem?.nominal)}
             </Text>
-            <Text style={{fontWeight: 'bold', fontSize: 15}}>
+            <Text style={{ontSize: 15}}>
               {' '}
               {formatDateString(selectedItem?.date)}
             </Text>
